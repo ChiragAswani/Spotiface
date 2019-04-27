@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Spotiface</title>
+  </head>
+  <body>
+    <h1>Spotiface</h1>
+    <a href={{auth_url}}>Login With Spotify</a>
+    	{% if active_device == 'INIT' %}
+    	{% elif active_device == 'NONE' %}
+    		<p>You Have No Active Devices</p>
+    	{% else %}
+    		<p>Currently Playing from: {{active_device['name']}}</p>
+            <a href="http://everynoise.com/everynoise1d.cgi?scope=all">List of Spotify Genres</a>
+        <form method="post" action="/genre">
+          <input placeholder="Please enter a genre" name="genre" id="genre"></input>
+          <button type="submit">Submit</button>
+        </form>
+        
+        <img id="bg" src="{{ url_for('video_feed', device_id=active_device['id'], access_token=access_token) }}">
+		{% endif %}    
+  </body>
+</html>
